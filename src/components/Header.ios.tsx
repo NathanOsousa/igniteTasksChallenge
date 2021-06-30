@@ -20,11 +20,11 @@ export function Header({theme}: HeaderProps) {
 const styles = (theme: string = 'dark') => {
   return StyleSheet.create({
     container: {
-      backgroundColor: theme === 'dark' ? '#191932' : '#273FAD',
+      backgroundColor: theme === 'dark' ? '#282B5A' : '#273FAD',
     },
     header: {
       paddingBottom: 44,
-      backgroundColor: theme === 'dark' ? '#191932' : '#273FAD',
+      backgroundColor: theme === 'dark' ? '#282B5A' : '#273FAD',
       justifyContent: 'center',
       alignItems: 'center',
       flexDirection: 'row',

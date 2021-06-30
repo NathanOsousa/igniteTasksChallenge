@@ -54,7 +54,7 @@ export function TodoInput({addTask, theme}: TodoInputProps) {
 const styles = (theme: string) => {
   return StyleSheet.create({
     inputContainer: {
-      backgroundColor: theme === 'dark' ? '#212136' : '#F5F4F8',
+      backgroundColor: theme === 'dark' ? '#413A6F' : '#F5F4F8',
       borderRadius: 5,
       marginTop: -25,
       marginHorizontal: 40,
@@ -81,7 +81,7 @@ const styles = (theme: string) => {
       elevation: 5,
     },
     addButton: {
-      backgroundColor: '#3FAD27',
+      backgroundColor: theme === 'dark' ? '#9347CA' : '#3FAD27',
       height: 50,
       paddingHorizontal: 16,
       justifyContent: 'center',

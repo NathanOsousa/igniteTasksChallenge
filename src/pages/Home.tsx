@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TouchableOpacity} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import {Header} from '../components/Header';
 import {MyTasksList} from '../components/MyTasksList';
 import {TodoInput} from '../components/TodoInput';
@@ -49,12 +49,16 @@ export function Home() {
   }
 
   return (
-    <>
+    <View
+      style={{
+        backgroundColor: theme === 'dark' ? '#191D3A' : '#F5F4F8',
+        flexGrow: 1,
+      }}>
       <Header theme={theme} />
 
       <TodoInput addTask={handleAddTask} theme={theme} />
       <TouchableOpacity
-        style={{backgroundColor: 'red', height: 20, width: 20, zIndex: 10}}
+        style={{backgroundColor: 'black', height: 20, width: 20}}
         onPress={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       />
       <MyTasksList
@@ -63,6 +67,6 @@ export function Home() {
         onPress={handleMarkTaskAsDone}
         onLongPress={handleRemoveTask}
       />
-    </>
+    </View>
   );
 }
