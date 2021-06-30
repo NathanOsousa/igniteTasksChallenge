@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import {TouchableOpacity} from 'react-native';
 import {Header} from '../components/Header';
 import {MyTasksList} from '../components/MyTasksList';
 import {TodoInput} from '../components/TodoInput';
@@ -9,9 +9,13 @@ interface Task {
   title: string;
   done: boolean;
 }
+interface Theme {
+  theme: string;
+}
 
 export function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [theme, setTheme] = useState<Theme['theme']>('dark');
 
   function handleAddTask(newTaskTitle: string) {
     if (newTaskTitle !== '') {
@@ -46,11 +50,15 @@ export function Home() {
 
   return (
     <>
-      <Header />
+      <Header theme={theme} />
 
-      <TodoInput addTask={handleAddTask} />
-
+      <TodoInput addTask={handleAddTask} theme={theme} />
+      <TouchableOpacity
+        style={{backgroundColor: 'red', height: 20, width: 20, zIndex: 10}}
+        onPress={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      />
       <MyTasksList
+        theme={theme}
         tasks={tasks}
         onPress={handleMarkTaskAsDone}
         onLongPress={handleRemoveTask}

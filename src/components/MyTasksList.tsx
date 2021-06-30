@@ -11,7 +11,7 @@ import {
 function FlatListHeaderComponent() {
   return (
     <View>
-      <Text style={styles.header}>Minhas tasks</Text>
+      <Text style={styles().header}>Minhas tasks</Text>
     </View>
   );
 }
@@ -24,9 +24,15 @@ interface MyTasksListProps {
   }[];
   onPress: (id: number) => void;
   onLongPress: (id: number) => void;
+  theme: string;
 }
 
-export function MyTasksList({tasks, onLongPress, onPress}: MyTasksListProps) {
+export function MyTasksList({
+  tasks,
+  onLongPress,
+  onPress,
+  theme,
+}: MyTasksListProps) {
   return (
     <FlatList
       data={tasks}
@@ -38,12 +44,19 @@ export function MyTasksList({tasks, onLongPress, onPress}: MyTasksListProps) {
             activeOpacity={0.7}
             onPress={() => onPress(item.id)}
             onLongPress={() => onLongPress(item.id)}
-            style={[styles.taskButton, item.done && styles.taskButtonDone]}>
+            style={[
+              styles(theme).taskButton,
+              item.done && styles().taskButtonDone,
+            ]}>
             <View
               testID={`marker-${index}`}
-              style={[styles.taskMarker, item.done && styles.taskMarkerDone]}
+              style={[
+                styles().taskMarker,
+                item.done && styles().taskMarkerDone,
+              ]}
             />
-            <Text style={[styles.taskText, item.done && styles.taskTextDone]}>
+            <Text
+              style={[styles().taskText, item.done && styles().taskTextDone]}>
               {item.title}
             </Text>
           </TouchableOpacity>
@@ -61,51 +74,53 @@ export function MyTasksList({tasks, onLongPress, onPress}: MyTasksListProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  header: {
-    color: '#3D3D4D',
-    fontSize: 24,
-    fontFamily: 'Poppins-SemiBold',
-  },
-  taskButton: {
-    flex: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 12,
-    marginBottom: 4,
-    borderRadius: 4,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  taskMarker: {
-    height: 16,
-    width: 16,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#3D3D4D',
-    marginRight: 10,
-  },
-  taskText: {
-    color: '#3D3D4D',
-  },
-  taskButtonDone: {
-    flex: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 12,
-    marginBottom: 4,
-    borderRadius: 4,
-    backgroundColor: 'rgba(25, 61, 223, 0.1)',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  taskMarkerDone: {
-    height: 16,
-    width: 16,
-    borderRadius: 8,
-    backgroundColor: '#273FAD',
-    marginRight: 10,
-  },
-  taskTextDone: {
-    color: '#A09CB1',
-    textDecorationLine: 'line-through',
-  },
-});
+const styles = (theme: string = 'dark') => {
+  return StyleSheet.create({
+    header: {
+      color: '#3D3D4D',
+      fontSize: 24,
+      fontFamily: 'Poppins-SemiBold',
+    },
+    taskButton: {
+      flex: 1,
+      paddingHorizontal: 10,
+      paddingVertical: 12,
+      marginBottom: 4,
+      borderRadius: 4,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    taskMarker: {
+      height: 16,
+      width: 16,
+      borderRadius: 8,
+      borderWidth: 1,
+      borderColor: '#3D3D4D',
+      marginRight: 10,
+    },
+    taskText: {
+      color: '#3D3D4D',
+    },
+    taskButtonDone: {
+      flex: 1,
+      paddingHorizontal: 10,
+      paddingVertical: 12,
+      marginBottom: 4,
+      borderRadius: 4,
+      backgroundColor: 'rgba(25, 61, 223, 0.1)',
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    taskMarkerDone: {
+      height: 16,
+      width: 16,
+      borderRadius: 8,
+      backgroundColor: '#273FAD',
+      marginRight: 10,
+    },
+    taskTextDone: {
+      color: '#A09CB1',
+      textDecorationLine: 'line-through',
+    },
+  });
+};
