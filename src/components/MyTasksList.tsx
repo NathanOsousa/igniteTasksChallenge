@@ -52,13 +52,10 @@ export function MyTasksList({
         );
       }}
       ListHeaderComponent={
-        <View>
+        <View style={{marginBottom: 20}}>
           <Text style={styles(theme).header}>Minhas tasks</Text>
         </View>
       }
-      ListHeaderComponentStyle={{
-        marginBottom: 20,
-      }}
       style={{
         marginHorizontal: 24,
         marginTop: 32,

@@ -3,6 +3,7 @@ import {TouchableOpacity, View} from 'react-native';
 import {Header} from '../components/Header';
 import {MyTasksList} from '../components/MyTasksList';
 import {TodoInput} from '../components/TodoInput';
+import {FilterInput} from '../components/FilterInput';
 
 interface Task {
   id: number;
@@ -15,6 +16,7 @@ interface Theme {
 
 export function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [FilteredTasks, setFilteredTasks] = useState<Task[]>([]);
   const [theme, setTheme] = useState<Theme['theme']>('dark');
 
   function handleAddTask(newTaskTitle: string) {
@@ -48,6 +50,15 @@ export function Home() {
     setTasks(newTasks);
   }
 
+  function filterTasks(term: string) {
+    if (!term) {
+      setFilteredTasks([]);
+      return;
+    }
+    const filtered = tasks.filter(item => item.title.indexOf(term) > -1);
+    setFilteredTasks(filtered);
+  }
+
   return (
     <View
       style={{
@@ -57,13 +68,14 @@ export function Home() {
       <Header theme={theme} />
 
       <TodoInput addTask={handleAddTask} theme={theme} />
+      <FilterInput filterTasks={filterTasks} theme={theme} />
       <TouchableOpacity
         style={{backgroundColor: 'black', height: 20, width: 20}}
         onPress={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       />
       <MyTasksList
         theme={theme}
-        tasks={tasks}
+        tasks={FilteredTasks.length > 0 ? FilteredTasks : tasks}
         onPress={handleMarkTaskAsDone}
         onLongPress={handleRemoveTask}
       />
